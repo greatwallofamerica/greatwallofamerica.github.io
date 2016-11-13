@@ -9,7 +9,7 @@
 	content="ToV2n6FunQ7U7xMDDNX9x6Fv9nknl-lNltESRkPXYEk" />
 <link rel="stylesheet" type="text/css"
 	href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/css/99gains.css">
+<link rel="stylesheet" src="/css/blockrain.css">
 <link rel="stylesheet" type="text/css" href="/css/99gains.css">
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.3/angular.min.js"></script>
@@ -62,18 +62,26 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">99Walls</a>
+				<a class="navbar-brand" href="/">Great Wall of America</a>
 			</div>
 		</div>
 	</div>
 	<div class="well page-header">
 		<h1>
-			Welcome
+			Keep calm, build walls
 			<br>
-			<small>And I think they recognized a part of themselves in me too. That commitment is at the core of the Treaty, and it must be kept for all who fully abide by it.</small>
+			<small>Be a part of something big. Claim your place in history.</small>
 		</h1>
 	</div>
 	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12">
+				<div class="game" style="height:500px; margin: auto;"></div>
+			</div>
+		</div>
+		<div class="visible">
+			<br>
+		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<div class="panel panel-default">
@@ -125,6 +133,27 @@
 	</div>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+  src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"
+  integrity="sha256-4JY5MVcEmAVSuS6q4h9mrwCm6KNx91f3awsSQgwu0qc="
+  crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/blockrain.jquery.src.js"></script>
+	<script type="text/javascript" src="/js/blockrain.jquery.libs.js"></script>
+	<script type="text/javascript" src="/js/blockrain.jquery.themes.js"></script>
+	<script>
+		$('.game').blockrain({
+			autoplay: true,
+			autoplayRestart: true,
+			theme: 'custom2',
+			playText: '',
+		  playButtonText: '',
+		  gameOverText: '',
+		  restartButtonText: '',
+		  scoreText: '',
+		  autoBlockWidth: true
+		});
+		$('.game').blockrain('controls', false);
+	</script>
 </body>
 </HTML>

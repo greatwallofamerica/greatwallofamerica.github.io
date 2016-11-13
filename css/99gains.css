@@ -2,6 +2,12 @@ body {
 	background: url("/images/brickwall.png");
 }
 
+.blockrain-start-holder,
+.blockrain-game-over-holder,
+.blockrain-score-holder {
+	display:none !important
+}
+
 .navbar-default .navbar-brand {
 	color: #1C9FFC;
 }
