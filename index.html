@@ -77,7 +77,7 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 current-score">
+			<div class="col-xs-12 current-score" style="visibility: hidden;">
 				Total Bricks Placed: <span class="score">12</span>
 			</div>
 		</div>
@@ -204,6 +204,7 @@
 	<script>
 	$.get("https://api.greatwallofamerica.org/count/score", function(data, status){
 		$('.current-score .score').html(data);
+		$('.current-score').css('visibility', 'visible');
   });
 	</script>
 </body>
