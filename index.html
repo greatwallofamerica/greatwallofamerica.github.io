@@ -69,7 +69,21 @@
 	<div class="well page-header">
 		<h1>
 			Build walls, for charity
+			<br>
+			<small>
+				All advertisement revenue is donated to charities which support US veterans
+			</small>
 		</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 current-score">
+				Total Bricks Placed: <span class="score">12</span>
+			</div>
+		</div>
+	</div>
+	<div class="visible">
+		<br>
 	</div>
 	<div class="container">
 		<div class="row visible-xs">
@@ -98,7 +112,7 @@
 		<div class="visible">
 			<br>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -145,7 +159,7 @@
 						src="https://placekitten.com/g/200/200" alt="">
 				</a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -153,23 +167,44 @@
   src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"
   integrity="sha256-4JY5MVcEmAVSuS6q4h9mrwCm6KNx91f3awsSQgwu0qc="
   crossorigin="anonymous"></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47022454-8', 'auto');
+  ga('send', 'pageview');
+
+	</script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.src.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.libs.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.themes.js"></script>
 	<script>
 		$('.game').blockrain({
-			autoplay: true,
+			autoplay: false,
 			autoplayRestart: true,
 			theme: 'custom2',
 			playText: '',
-		  playButtonText: '',
-		  gameOverText: '',
-		  restartButtonText: '',
+		  playButtonText: 'Play',
+		  gameOverText: 'Game over',
+		  restartButtonText: 'Start again',
 		  scoreText: '',
-		  autoBlockWidth: true
+		  autoBlockWidth: true,
+		  controls: true,
+
+		  onPlaced: function(){
+		  	current_score = parseInt($('.current-score .score').text())
+		  	$('.current-score .score').html(current_score + 1);
+		  	ga( 'send', 'event', 'tetris', 'block_placed');
+		  }
 		});
-		$('.game').blockrain('controls', false);
+	</script>
+	<script>
+	$.get("https://api.greatwallofamerica.org/count/score", function(data, status){
+		$('.current-score .score').html(data);
+  });
 	</script>
 </body>
 </HTML>
