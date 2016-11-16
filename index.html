@@ -78,7 +78,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 current-score" style="visibility: hidden;">
-				Total Bricks Placed: <span class="score">12</span>
+				Total Bricks Placed: <span id="animate-score" class="score">12</span>
 			</div>
 		</div>
 	</div>
@@ -178,10 +178,15 @@
 
 	</script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/countUp.min.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.src.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.libs.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.themes.js"></script>
 	<script>
+		function numberWithCommas(x) {
+    	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+
 		$('.game').blockrain({
 			autoplay: false,
 			speed: 20,
@@ -196,30 +201,40 @@
 		  controls: true,
 
 		  onPlaced: function(){
-		  	current_score = parseInt($('.current-score .score').text())
-		  	$('.current-score .score').html(current_score + 1);
+  			current_score = parseInt($('.current-score .score').text().replace(',', ''))
+		  	$('.current-score .score').html(numberWithCommas(current_score + 1));
 		  	ga( 'send', 'event', 'tetris', 'block_placed');
 		  }
 		});
 	</script>
 	<script>
 	velocity = 0;
+	refresh_interval_id = -1;
 
 	$.get("https://api.greatwallofamerica.org/count/score?" + Date.now(), function(data, status){
 		json = JSON.parse(data);
 
-		$('.current-score .score').html(json.score);
 		$('.current-score').css('visibility', 'visible');
 
 		velocity = json.velocity;
-		if(velocity > 0) {
-			setInterval(updateScore, 1000);
-		}
+
+		var numAnim = new CountUp("animate-score", 0, json.score);
+		numAnim.start(function() {
+			if(velocity > 0) {
+				refresh_interval_id = setInterval(updateScore, 1000);
+			}
+		});
   });
 
   function updateScore() {
-  	current_score = parseInt($('.current-score .score').text())
-		$('.current-score .score').html(current_score + velocity);
+  	clearInterval(refresh_interval_id);
+
+  	current_score = parseInt($('.current-score .score').text().replace(',', ''))
+
+  	var numAnim = new CountUp("animate-score", current_score, current_score + velocity);
+		numAnim.start(function() {
+			refresh_interval_id = setInterval(updateScore, 1000);
+		});
   }
 	</script>
 </body>
