@@ -202,7 +202,7 @@
 		});
 	</script>
 	<script>
-	$.get("https://api.greatwallofamerica.org/count/score", function(data, status){
+	$.get("https://api.greatwallofamerica.org/count/score?" + Date.now(), function(data, status){
 		$('.current-score .score').html(data);
 		$('.current-score').css('visibility', 'visible');
   });
