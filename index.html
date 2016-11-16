@@ -203,11 +203,24 @@
 		});
 	</script>
 	<script>
+	velocity = 0;
+
 	$.get("https://api.greatwallofamerica.org/count/score?" + Date.now(), function(data, status){
 		json = JSON.parse(data);
+
 		$('.current-score .score').html(json.score);
 		$('.current-score').css('visibility', 'visible');
+
+		velocity = json.velocity;
+		if(velocity > 0) {
+			setInterval(updateScore, 1000);
+		}
   });
+
+  function updateScore() {
+  	current_score = parseInt($('.current-score .score').text())
+		$('.current-score .score').html(current_score + velocity);
+  }
 	</script>
 </body>
 </HTML>
