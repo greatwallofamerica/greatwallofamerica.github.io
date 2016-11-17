@@ -1499,9 +1499,37 @@
           $(document) .bind('keydown.blockrain', keydown)
                       .bind('keyup.blockrain', keyup);
         }
+        
+        if (typeof Hammer !== 'undefined' && Hammer) {
+          var game = this;
+
+          var mc = new Hammer.Manager(this.element[0]);
+          var pan = new Hammer.Pan({threshold: 20});
+          var tap = new Hammer.Tap();
+
+          mc.add(pan);
+          mc.add(tap);
+
+          mc.on("panleft panright tap", function(ev) {
+            if(!game._board || !game._board.started) return;
+            if (ev.type == "tap") {
+              game._board.cur.rotate('right');
+              return;
+            }
+
+            if(ev.distance % 5 <= 3) return;
+
+            if (ev.type == "panleft") {
+              moveLeft(true);
+              moveLeft(false);
+            } else if(ev.type == "panright") {
+              moveRight(true);
+              moveRight(false);
+            }
+          });
+        }
       }
     },
-
 
     _setupTouchControls: function(enable) {
 

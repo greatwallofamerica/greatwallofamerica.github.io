@@ -92,7 +92,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">This is an ad</h3>
 					</div>
-					<div class="panel-body">Ad goes here</div>
+					<div class="panel-body ad">Ad goes here</div>
 				</div>
 			</div>
 		</div>
@@ -112,54 +112,6 @@
 		<div class="visible">
 			<br>
 		</div>
-		<!-- <div class="row">
-			<div class="col-xs-12 col-sm-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">What is this?</h3>
-					</div>
-					<div class="panel-body">Great Wall of America donates all advertisement proceeds to charities which help United States veterans. Every brick counts.</div>
-				</div>
-			</div>
-			<div class="visible-xs">
-				<br>
-			</div>
-			<div class="col-xs-12 col-sm-3">
-				<a href="#" class="thumbnail">
-					<img class="img-responsive img-circle"
-						src="https://placekitten.com/g/200/200" alt="">
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-3">
-				<a href="#" class="thumbnail">
-					<img class="img-responsive img-circle"
-						src="https://placekitten.com/g/200/200" alt="">
-				</a>
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-sm-push-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">What we do</h3>
-					</div>
-					<div class="panel-body">Board of Education, and the inferior education they provided, then and now, helps explain the pervasive achievement gap between today's black and white students. It's not because John McCain doesn't care. To play a role in fulfilling Palestinian aspirations, and to unify the Palestinian people, Hamas must put an end to violence, recognize past agreements, and recognize Israel's right to exist.</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-3 col-sm-pull-3">
-				<a href="#" class="thumbnail">
-					<img class="img-responsive img-circle"
-						src="https://placekitten.com/g/200/200" alt="">
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-3 col-sm-pull-9">
-				<a href="#" class="thumbnail">
-					<img class="img-responsive img-circle"
-						src="https://placekitten.com/g/200/200" alt="">
-				</a>
-			</div>
-		</div> -->
 	</div>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -179,6 +131,7 @@
 	</script>
 	<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/countUp.min.js"></script>
+	<script type="text/javascript" src="/js/hammer.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.src.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.libs.js"></script>
 	<script type="text/javascript" src="/js/blockrain.jquery.themes.js"></script>
@@ -198,14 +151,34 @@
 		  restartButtonText: 'Start again',
 		  scoreText: '',
 		  autoBlockWidth: true,
-		  controls: true,
 
 		  onPlaced: function(){
   			current_score = parseInt($('.current-score .score').text().replace(',', ''))
 		  	$('.current-score .score').html(numberWithCommas(current_score + 1));
 		  	ga( 'send', 'event', 'tetris', 'block_placed');
-		  }
+		  },
+
+		  // onStart: function() {
+				// var game = document.getElementsByClassName('game')[0];
+				// var mc = new Hammer(game);
+				// mc.on("swipeleft swiperight swipedown tap", function(ev) {
+				// 		var ad = document.getElementsByClassName('ad')[0];
+				// 		if (ev.type == "swipeleft") {
+
+				// 		} else if(ev.type == "swiperight") {
+
+				// 		} else if(ev.type == "swipedown") {
+
+				// 		} else {
+							
+				// 		}
+				//     ad.textContent = ev.type +" gesture detected.";
+				// });
+		  // }
 		});
+
+		$('game').blockrain('controls', true);
+
 	</script>
 	<script>
 	velocity = 0;
